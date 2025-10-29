@@ -1,0 +1,44 @@
+@model MyApp.Models.Auction
+
+<form asp-action="Create" method="post">
+@Html.AntiForgeryToken()
+
+    <div>
+        <label>Tên sản phẩm</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label>Mô tả</label>
+        <textarea asp-for="Description"></textarea>
+    </div>
+
+    <div>
+        <label>Ảnh (URL)</label>
+        <input asp-for="ImgUrl" />
+    </div>
+
+    <div>
+        <label>Giá khởi điểm</label>
+        <input asp-for="PriceStart" type="number" />
+        <span asp-validation-for="PriceStart"></span>
+    </div>
+
+    <div>
+        <label>Thời gian bắt đầu</label>
+        <input asp-for="TimeStart" type="datetime-local" />
+    </div>
+
+    <div>
+        <label>Thời gian kết thúc</label>
+        <input asp-for="TimeEnd" type="datetime-local" />
+        <span asp-validation-for="TimeEnd"></span>
+    </div>
+
+    <button type="submit">Tạo đấu giá</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

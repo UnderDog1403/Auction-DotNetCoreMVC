@@ -1,0 +1,46 @@
+@model MyApp.Models.Auction
+@{
+    var auctionId = (int)ViewData["AuctionId"];
+}
+
+<h2>Chi tiết phiên đấu giá</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4>@Model.Name</h4>
+        <p><strong>Thời gian bắt đầu:</strong> @Model.TimeStart.ToString("dd/MM/yyyy HH:mm")</p>
+        <p><strong>Thời gian kết thúc:</strong> @Model.TimeEnd.ToString("dd/MM/yyyy HH:mm")</p>
+        <p><strong>Trạng thái:</strong> @Model.Status</p>
+        <p><strong>Price Start</strong>@Model.PriceStart</p>
+        <p><strong>Giá cao nhất hiện tại:</strong> <span id="highestBid">@ViewBag.HighestBid.ToString("N0") VNĐ</span></p>
+
+    
+        <form asp-controller="Bid" asp-action="PlaceBid" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="auctionId" value="@Model.Id" />
+    <div class="form-group">
+        <label for="bidAmount">Nhập giá của bạn:</label>
+        <input type="number" name="bidAmount" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Đặt giá</button>
+</form>
+
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/auctionHub")
+        .build();
+
+    connection.on("ReceiveHighestBid", function (auctionId, price) {
+        if (auctionId === @Model.Id) {
+            document.getElementById("highestBid").innerText = price.toLocaleString('vi-VN') + " VNĐ";
+        }
+    });
+
+    connection.start().catch(function (err) {
+        console.error(err.toString());
+    });
+</script>
