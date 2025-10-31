@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyApp.Data;
 
@@ -11,9 +12,11 @@ using MyApp.Data;
 namespace MyApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251030161911_AddPaymentStatus")]
+    partial class AddPaymentStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,8 +64,6 @@ namespace MyApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Auctions");
                 });
@@ -170,17 +171,6 @@ namespace MyApp.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MyApp.Models.Auction", b =>
-                {
-                    b.HasOne("MyApp.Models.User", "User")
-                        .WithMany("Auctions")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MyApp.Models.Bid", b =>
                 {
                     b.HasOne("MyApp.Models.Auction", "Auction")
@@ -223,13 +213,12 @@ namespace MyApp.Migrations
                 {
                     b.Navigation("Bids");
 
-                    b.Navigation("Payment");
+                    b.Navigation("Payment")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MyApp.Models.User", b =>
                 {
-                    b.Navigation("Auctions");
-
                     b.Navigation("Bids");
 
                     b.Navigation("Payment");

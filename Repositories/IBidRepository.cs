@@ -8,6 +8,7 @@ namespace MyApp.Repositories
         IEnumerable<Bid> GetAll();
         Bid GetById(int id);
         Bid GetHighestBidForAuction(int id);
+        List<Bid> GetAllBilsWithDetails();
         void Add(Bid bid);
         void Save();
     }

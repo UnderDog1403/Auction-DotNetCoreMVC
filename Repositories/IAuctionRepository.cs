@@ -8,6 +8,8 @@ namespace MyApp.Repositories
         IEnumerable<Auction> GetAll();
         IEnumerable<Auction> GetApprovedAuctions();
         IEnumerable<Auction> GetActiveAuctions();
+        List<Auction> GetAllAuctionsWithDetails();
+        void UpdateStatus(int auctionId, AuctionStatus status);
         Auction GetById(int id);
         void Add(Auction auction);
         void Update(Auction auction);

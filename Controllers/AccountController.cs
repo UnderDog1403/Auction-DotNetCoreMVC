@@ -20,6 +20,56 @@ namespace MyApp.Controllers
         {
             return View();
         }
+        [HttpGet]
+
+        public IActionResult LoginAdmin()
+        {
+            return View();
+        }
+         public IActionResult AdminDashboard()
+        {
+            return View(); 
+        }
+
+        [HttpPost]
+        public IActionResult LoginAdmin(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _userRepository.GetAll()
+                    .FirstOrDefault(u => u.Email == model.Email && 
+                                         u.PasswordHash == model.Password &&
+                                         u.Role == 1);
+                Console.WriteLine("User: " + (user != null ? user.Name : "None"));
+                if (user != null)
+                {
+                    // Sign in the user
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Name, user.Name),
+                        new Claim(ClaimTypes.Email, user.Email),
+                        new Claim(ClaimTypes.Role, user.Role.ToString())
+                    };
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var authProperties = new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    };
+
+                    HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity),
+                        authProperties).Wait();
+
+                    return RedirectToAction("AdminDashboard");
+                }
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
+
+            return View(model);
+        }
 
 
         [HttpPost]

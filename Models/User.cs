@@ -25,7 +25,10 @@ namespace MyApp.Models
         public int Role { get; set; } = 2;
 
         public bool IsActivated { get; set; } = true;
-        public virtual ICollection<Bid> Bids { get; set; }
+        public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
+        public ICollection<Payment> Payment { get; set; } = new List<Payment>();
+         public virtual ICollection<Auction> Auctions { get; set; } = new List<Auction>();
+
 
     }
 }

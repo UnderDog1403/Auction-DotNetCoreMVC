@@ -1,5 +1,6 @@
 using MyApp.Models;
 using MyApp.Data;
+using Microsoft.EntityFrameworkCore;
 namespace MyApp.Repositories
 {
     public class BidRepository : IBidRepository
@@ -26,6 +27,13 @@ namespace MyApp.Repositories
                 .Where(b => b.AuctionID == id)
                 .OrderByDescending(b => b.Price)
                 .FirstOrDefault();
+        }
+        public List<Bid> GetAllBilsWithDetails()
+        {
+            return _context.Bids
+                .Include(b => b.Auction)
+                .Include(b => b.User)
+                .ToList();
         }
         public void Add(Bid bid)
         {
