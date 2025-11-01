@@ -40,6 +40,6 @@ namespace MyApp.Models
         public AuctionStatus Status { get; set; } = AuctionStatus.Pending;
         public virtual ICollection<Bid> Bids { get; set; } = new List<Bid>();
         public Payment? Payment { get; set; }
-        public virtual User User { get; set; }
+        public virtual User? User { get; set; }
     }
 }

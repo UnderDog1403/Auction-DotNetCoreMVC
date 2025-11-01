@@ -2,16 +2,27 @@
 @{
     var auctionId = (int)ViewData["AuctionId"];
 }
-<h2>Chi tiết phiên đấu giá</h2>
+<h2 class="text-center">Chi tiết phiên đấu giá</h2>
     <div class="card">
     <div class="card-body">
-        <h4 class="text-center">@Model.Name</h4>
-        <img src="@Model.ImgUrl" alt="Ảnh sản phẩm @Model.Name" class="img-fluid mb-3" style="max-height: 300px;" />
-        <p><strong>Thời gian bắt đầu:</strong> @Model.TimeStart.ToString("dd/MM/yyyy HH:mm")</p>
-        <p><strong>Thời gian kết thúc:</strong> @Model.TimeEnd.ToString("dd/MM/yyyy HH:mm")</p>
-        <p><strong>Trạng thái: </strong> @Model.Status</p>
+     <div class="row">
+        <div class="col-md-6 text-center"><img class="img-fluid rounded float-start" src="@Model.ImgUrl" alt="Ảnh sản phẩm @Model.Name" class="img-fluid mb-3" style="max-height: 300px;" /></div>
+        <div class="col-md-6">
+            <div class="row"><p><strong>Tên sản phẩm: </strong>@Model.Name</p></div>
+            <div class="row"><p><strong>Giới thiệu sản phẩm: </strong> @Model.Description</p></div>
+            <div class="row"><p><strong>Thời gian kết thúc:</strong> @Model.TimeEnd.ToString("dd/MM/yyyy HH:mm")</p></div>
+            <div class="row"><p><strong>Price Start: </strong>@Model.PriceStart.ToString("N0") VNĐ</p></div>
+            <div class="row"><p><strong>Giá cao nhất hiện tại:</strong> <span id="highestBid" class="text-danger">@ViewBag.HighestBid.ToString("N0") VNĐ</span></p></div>
+            
+        </div>
+    </div>
+        @* <h4 class="text-center">@Model.Name</h4> *@
+        @* <img src="@Model.ImgUrl" alt="Ảnh sản phẩm @Model.Name" class="img-fluid mb-3" style="max-height: 300px;" /> *@
+        @* <p><strong>Thời gian bắt đầu:</strong> @Model.TimeStart.ToString("dd/MM/yyyy HH:mm")</p>
+        <p><strong>Thời gian kết thúc:</strong> @Model.TimeEnd.ToString("dd/MM/yyyy HH:mm")</p> *@
+        @* <p><strong>Trạng thái: </strong> @Model.Status</p>
         <p><strong>Price Start: </strong>@Model.PriceStart</p>
-        <p><strong>Giá cao nhất hiện tại:</strong> <span id="highestBid">@ViewBag.HighestBid.ToString("N0") VNĐ</span></p>
+        <p><strong>Giá cao nhất hiện tại:</strong> <span id="highestBid">@ViewBag.HighestBid.ToString("N0") VNĐ</span></p> *@
     
     
         <form asp-controller="Bid" asp-action="PlaceBid" method="post">
@@ -21,7 +32,7 @@
         <label for="bidAmount">Nhập giá của bạn:</label>
         <input type="number" name="bidAmount" class="form-control" required />
     </div>
-    <button type="submit" class="btn btn-primary mt-2">Đặt giá</button>
+    <button type="submit" class="btn btn-primary mt-2 text-center">Đặt giá</button>
 </form>
 
     </div>
