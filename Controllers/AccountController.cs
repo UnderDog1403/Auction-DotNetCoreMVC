@@ -62,8 +62,7 @@ namespace MyApp.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties).Wait();
-
-                    return RedirectToAction("AdminDashboard");
+                    return RedirectToAction("Privacy", "Home");
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }

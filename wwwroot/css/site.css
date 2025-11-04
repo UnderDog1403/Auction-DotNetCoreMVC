@@ -19,7 +19,14 @@ html {
 
 body {
   margin-bottom: 60px;
+
+  background-color: rgba(203, 196, 189, 0.959);
 }
+/* header nav{
+   background-color: rgba(173, 169, 163, 0.959);
+} */
+
+
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
@@ -29,3 +36,8 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+/* .navbar .nav-link:hover {
+                background-color: #0a58ca;
+                color: #fff !important;
+                border-radius: 4px;
+            } */

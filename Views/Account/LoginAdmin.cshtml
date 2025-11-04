@@ -1,20 +1,28 @@
 @model MyApp.Models.LoginModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+        <form asp-action="Login" method="post">
+            <h4 class="text-center mb-4">Login</h4>
 
-<form asp-action="LoginAdmin" method="post">
-    <div>
-        <label>Tên đăng nhập</label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" asp-for="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword1" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </form>
     </div>
-
-    <div>
-        <label>Mật khẩu</label>
-        <input asp-for="Password" type="password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-
-    <button type="submit">Đăng nhập</button>
-</form>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

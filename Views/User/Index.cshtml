@@ -1,0 +1,30 @@
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model IEnumerable<MyApp.Models.User>
+<h2>Danh sách don hang</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên </th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Hoạt động</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.Phone</td>
+                <td>@user.Address</td>
+            </tr>
+        }
+    </tbody>
+</table>

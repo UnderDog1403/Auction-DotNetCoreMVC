@@ -60,9 +60,10 @@ namespace MyApp.Controllers
             _bidRepository.Add(bid);
             _bidRepository.Save();
             await _hubContext.Clients.All.SendAsync("ReceiveHighestBid", auctionId, bid.Price);
-            return RedirectToAction("Details", "Auction", new { id = auctionId });
+            // return RedirectToAction("Details", "Auction", new { id = auctionId });
 
-            // return Ok("Đặt giá thành công.");
+            return Ok();
+
         }
         public IActionResult Index()
         {
